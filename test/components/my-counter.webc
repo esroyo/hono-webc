@@ -1,0 +1,34 @@
+<template shadowrootmode="open">
+  <button>
+    Counter <span @raw="dataInitial ?? 0"></span>
+  </button>
+  <style>
+    :host(:not(:defined)) button {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button {
+      font-size: 3em;
+    }
+    :host(:defined) button {
+      color: red;
+    }
+  </style>
+</template>
+
+<slot></slot>
+
+<script>
+  class MyCounter extends HTMLElement {
+    static observedAttributes = ['data-initial'];
+    connectedCallback() {
+      this.onclick = () => {
+        this.dataset.initial = Number(this.dataset.initial) + 1;
+      };
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.shadowRoot.querySelector('span').innerHTML = newValue;
+    }
+  }
+  customElements.define('my-counter', MyCounter);
+</script>

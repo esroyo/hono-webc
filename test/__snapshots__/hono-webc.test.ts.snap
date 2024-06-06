@@ -1,0 +1,1034 @@
+export const snapshot = {};
+
+snapshot[`When middleware was created with a "*.webc" file as input > should render correctly if ctx.render is invoked with and html string as content 1`] = `
+\`<!doctype html>
+<html>
+<head>
+    <title>Cool</title>
+  </head>
+  <body>
+    
+    <my-counter data-initial="100"><template shadowrootmode="open">
+  <button>
+    Counter <span>100</span>
+  </button>
+  <style>
+    :host(:not(:defined)) button {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button {
+      font-size: 3em;
+    }
+    :host(:defined) button {
+      color: red;
+    }
+  </style>
+</template>
+
+
+
+<script>
+  class MyCounter extends HTMLElement {
+    static observedAttributes = ['data-initial'];
+    connectedCallback() {
+      this.onclick = () => {
+        this.dataset.initial = Number(this.dataset.initial) + 1;
+      };
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.shadowRoot.querySelector('span').innerHTML = newValue;
+    }
+  }
+  customElements.define('my-counter', MyCounter);
+</script>
+</my-counter>
+    <my-card><div class="person">
+  <h1>Joe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Monica</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Chandler</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Rachel</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Phoebe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Ross</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+
+  
+
+</body>
+</html>\`
+`;
+
+snapshot[`When middleware was created with a "*.webc" file as input > should render correctly if ctx.render is invoked with a "*.webc" file as content 1`] = `
+\`<!doctype html>
+<html>
+<head>
+    <title>Cool</title>
+  </head>
+  <body>
+    <my-counter data-initial="100"><template shadowrootmode="open">
+  <button>
+    Counter <span>100</span>
+  </button>
+  <style>
+    :host(:not(:defined)) button {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button {
+      font-size: 3em;
+    }
+    :host(:defined) button {
+      color: red;
+    }
+  </style>
+</template>
+
+
+
+<script>
+  class MyCounter extends HTMLElement {
+    static observedAttributes = ['data-initial'];
+    connectedCallback() {
+      this.onclick = () => {
+        this.dataset.initial = Number(this.dataset.initial) + 1;
+      };
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.shadowRoot.querySelector('span').innerHTML = newValue;
+    }
+  }
+  customElements.define('my-counter', MyCounter);
+</script>
+</my-counter>
+<my-card><div class="person">
+  <h1>Joe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Monica</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Chandler</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Rachel</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Phoebe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Ross</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+
+  
+
+</body>
+</html>\`
+`;
+
+snapshot[`When middleware was created with an html string as input > should render correctly if ctx.render is invoked with and html string as content 1`] = `
+\`<!doctype html>
+<html>
+<head>
+    <title>Cool</title>
+  </head>
+  <body>
+    <my-counter data-initial="100"><template shadowrootmode="open">
+  <button>
+    Counter <span>100</span>
+  </button>
+  <style>
+    :host(:not(:defined)) button {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button {
+      font-size: 3em;
+    }
+    :host(:defined) button {
+      color: red;
+    }
+  </style>
+</template>
+
+
+
+<script>
+  class MyCounter extends HTMLElement {
+    static observedAttributes = ['data-initial'];
+    connectedCallback() {
+      this.onclick = () => {
+        this.dataset.initial = Number(this.dataset.initial) + 1;
+      };
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.shadowRoot.querySelector('span').innerHTML = newValue;
+    }
+  }
+  customElements.define('my-counter', MyCounter);
+</script>
+</my-counter>
+    <my-card><div class="person">
+  <h1>Joe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Monica</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Chandler</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Rachel</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Phoebe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Ross</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+
+
+</body>
+</html>\`
+`;
+
+snapshot[`When middleware was created with an html string as input > should render correctly if ctx.render is invoked with a "*.webc" file as content 1`] = `
+\`<!doctype html>
+<html>
+<head>
+    <title>Cool</title>
+  </head>
+  <body><my-counter data-initial="100"><template shadowrootmode="open">
+  <button>
+    Counter <span>100</span>
+  </button>
+  <style>
+    :host(:not(:defined)) button {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button {
+      font-size: 3em;
+    }
+    :host(:defined) button {
+      color: red;
+    }
+  </style>
+</template>
+
+
+
+<script>
+  class MyCounter extends HTMLElement {
+    static observedAttributes = ['data-initial'];
+    connectedCallback() {
+      this.onclick = () => {
+        this.dataset.initial = Number(this.dataset.initial) + 1;
+      };
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.shadowRoot.querySelector('span').innerHTML = newValue;
+    }
+  }
+  customElements.define('my-counter', MyCounter);
+</script>
+</my-counter>
+<my-card><div class="person">
+  <h1>Joe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Monica</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Chandler</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Rachel</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Phoebe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Ross</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+
+
+</body>
+</html>\`
+`;
+
+snapshot[`When middleware was created without an input > should render correctly if ctx.render is invoked with and html string as content 1`] = `
+\`<!doctype html>
+<html>
+<head>
+    <title>Cool</title>
+  </head>
+  <body>
+    <my-counter data-initial="100"><template shadowrootmode="open">
+  <button>
+    Counter <span>100</span>
+  </button>
+  <style>
+    :host(:not(:defined)) button {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button {
+      font-size: 3em;
+    }
+    :host(:defined) button {
+      color: red;
+    }
+  </style>
+</template>
+
+
+
+<script>
+  class MyCounter extends HTMLElement {
+    static observedAttributes = ['data-initial'];
+    connectedCallback() {
+      this.onclick = () => {
+        this.dataset.initial = Number(this.dataset.initial) + 1;
+      };
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.shadowRoot.querySelector('span').innerHTML = newValue;
+    }
+  }
+  customElements.define('my-counter', MyCounter);
+</script>
+</my-counter>
+    <my-card><div class="person">
+  <h1>Joe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Monica</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Chandler</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Rachel</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Phoebe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Ross</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+  
+</body>
+</html>\`
+`;
+
+snapshot[`When middleware was created without an input > should render correctly if ctx.render is invoked with a "*.webc" file as content 1`] = `
+\`<!doctype html>
+<html>
+<head>
+    <title>Cool</title>
+    <style>* { color: green; }</style>
+  </head>
+  <body>
+    
+    <my-counter data-initial="100"><template shadowrootmode="open">
+  <button>
+    Counter <span>100</span>
+  </button>
+  <style>
+    :host(:not(:defined)) button {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button {
+      font-size: 3em;
+    }
+    :host(:defined) button {
+      color: red;
+    }
+  </style>
+</template>
+
+
+
+<script>
+  class MyCounter extends HTMLElement {
+    static observedAttributes = ['data-initial'];
+    connectedCallback() {
+      this.onclick = () => {
+        this.dataset.initial = Number(this.dataset.initial) + 1;
+      };
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.shadowRoot.querySelector('span').innerHTML = newValue;
+    }
+  }
+  customElements.define('my-counter', MyCounter);
+</script>
+</my-counter>
+    <my-card><div class="person">
+  <h1>Joe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Monica</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Chandler</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Rachel</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Phoebe</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+<my-card><div class="person">
+  <h1>Ross</h1>
+</div>
+
+<style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+</style>
+</my-card>
+    
+  
+
+</body>
+</html>\`
+`;
+
+snapshot[`When middleware was created with bundler mode > should render correctly if ctx.render is invoked with and html string as content 1`] = `
+\`<!doctype html>
+<html>
+<head>
+    <title>Cool</title>
+    
+    <style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+
+
+* { color: green; }</style>
+  </head>
+  <body>
+    
+    <my-counter data-initial="100"><template shadowrootmode="open">
+  <button>
+    Counter <span>100</span>
+  </button>
+  <style>
+    :host(:not(:defined)) button {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button {
+      font-size: 3em;
+    }
+    :host(:defined) button {
+      color: red;
+    }
+  </style>
+</template>
+
+
+
+
+</my-counter>
+    <my-card><div class="person">
+  <h1>Joe</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Monica</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Chandler</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Rachel</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Phoebe</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Ross</h1>
+</div>
+
+
+</my-card>
+
+    <script>
+  class MyCounter extends HTMLElement {
+    static observedAttributes = ['data-initial'];
+    connectedCallback() {
+      this.onclick = () => {
+        this.dataset.initial = Number(this.dataset.initial) + 1;
+      };
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.shadowRoot.querySelector('span').innerHTML = newValue;
+    }
+  }
+  customElements.define('my-counter', MyCounter);
+</script>
+  
+
+
+</body>
+</html>\`
+`;
+
+snapshot[`When middleware was created with bundler mode > should render correctly if ctx.render is invoked with a "*.webc" file as content 1`] = `
+\`<!doctype html>
+<html>
+<head>
+    <title>Cool</title>
+    
+    <style>
+    .person {
+        border: 1px solid black;
+        border-radius: 1em;
+        min-width: 5em;
+        min-height: 3em;
+        margin: 1em;
+        padding: 1em;
+    }
+
+
+* { color: green; }</style>
+  </head>
+  <body>
+    <my-counter data-initial="100"><template shadowrootmode="open">
+  <button>
+    Counter <span>100</span>
+  </button>
+  <style>
+    :host(:not(:defined)) button {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    button {
+      font-size: 3em;
+    }
+    :host(:defined) button {
+      color: red;
+    }
+  </style>
+</template>
+
+
+
+
+</my-counter>
+<my-card><div class="person">
+  <h1>Joe</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Monica</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Chandler</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Rachel</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Phoebe</h1>
+</div>
+
+
+</my-card>
+<my-card><div class="person">
+  <h1>Ross</h1>
+</div>
+
+
+</my-card>
+
+    <script>
+  class MyCounter extends HTMLElement {
+    static observedAttributes = ['data-initial'];
+    connectedCallback() {
+      this.onclick = () => {
+        this.dataset.initial = Number(this.dataset.initial) + 1;
+      };
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+      this.shadowRoot.querySelector('span').innerHTML = newValue;
+    }
+  }
+  customElements.define('my-counter', MyCounter);
+</script>
+  
+
+
+</body>
+</html>\`
+`;

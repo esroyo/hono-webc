@@ -1,0 +1,2 @@
+<my-counter :data-initial="initial"></my-counter>
+<my-card webc:for="friend of friends" :@person="friend"></my-card>

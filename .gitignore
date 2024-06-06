@@ -1,0 +1,6 @@
+.env
+.vim
+notes.md
+node_modules
+coverage
+coverage.lcov

@@ -1,0 +1,30 @@
+{
+  "version": "0.0.0",
+  "name": "@esroyo/hono-webc",
+  "exports": "./dist/hono-webc.js",
+  "tasks": {
+    "bundle": "bash bundle.sh",
+    "coverage": "rm -rf coverage && deno task test --reporter=dot --coverage=coverage && deno coverage --lcov --output=coverage.lcov coverage && genhtml -o coverage/report coverage.lcov",
+    "dev": "deno run --inspect --watch --allow-env --allow-read --allow-write --allow-net --allow-hrtime --allow-sys --unstable-kv test/main.ts",
+    "fmt": "deno fmt src/ test/ deps.ts dev_deps.ts",
+    "tag-version": "npx commit-and-tag-version && git push --follow-tags origin main",
+    "test": "deno test --allow-env --allow-read --allow-write --allow-hrtime --allow-sys --unstable-kv"
+  },
+  "fmt": {
+    "indentWidth": 4,
+    "singleQuote": true
+  },
+  "compilerOptions": {
+    // true:  enable TypeScript decorators
+    // false: enable ECMAScript decorators
+    "experimentalDecorators": false
+  },
+  "imports": {
+    "@11ty/webc": "npm:@11ty/webc@0.11.4",
+    "@hono/hono": "jsr:@hono/hono@4.4.4",
+    "@std/http": "jsr:@std/http@0.224.0",
+    "@std/testing": "jsr:@std/testing@0.224.0",
+    "lodash-es": "npm:lodash-es@4.17.21",
+    "parse5": "npm:parse5@7.1.2"
+  }
+}
