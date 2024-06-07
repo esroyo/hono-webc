@@ -5,6 +5,6 @@ export const WebC = _WebC as unknown as typeof import('npm:@11ty/webc@0.11.2');
 
 export { type Context as HonoContext, type ContextRenderer, Hono } from 'jsr:@hono/hono@4.4.4';
 export { createMiddleware } from 'jsr:@hono/hono@4.4.4/factory';
-export { type MiddlewareHandler } from 'jsr:@hono/hono@4.4.4/types';
+export type { Env as HonoEnv, Input as HonoInput, MiddlewareHandler as HonoMiddlewareHandler } from 'jsr:@hono/hono@4.4.4/types';
 export type { DefaultTreeAdapterMap } from 'npm:parse5@7.1.2';
 export { default as kebabCase } from 'npm:lodash-es@4.17.21/kebabCase.js';
