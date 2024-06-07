@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.1.2](https://github.com/esroyo/hono-webc/compare/v1.1.1...v1.1.2) (2024-06-07)
+
+
+### Bug Fixes
+
+* update webc-lax version to patch memory leak ([732b703](https://github.com/esroyo/hono-webc/commit/732b703e78fb7c096cd4bad5d293664e18ca9b4a))
+
 ## [1.1.1](https://github.com/esroyo/hono-webc/compare/v1.1.0...v1.1.1) (2024-06-07)
 
 
