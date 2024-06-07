@@ -4,6 +4,7 @@
     "specifiers": {
       "jsr:@deno/cache-dir@0.8": "jsr:@deno/cache-dir@0.8.0",
       "jsr:@esroyo/webc-lax@1.0.1": "jsr:@esroyo/webc-lax@1.0.1",
+      "jsr:@esroyo/webc-lax@1.0.2": "jsr:@esroyo/webc-lax@1.0.2",
       "jsr:@hono/hono@4.4.4": "jsr:@hono/hono@4.4.4",
       "jsr:@kitsonk/kv-toolbox@0.18.0": "jsr:@kitsonk/kv-toolbox@0.18.0",
       "jsr:@kitsonk/kv-toolbox@0.9.0": "jsr:@kitsonk/kv-toolbox@0.9.0",
@@ -51,6 +52,9 @@
       },
       "@esroyo/webc-lax@1.0.1": {
         "integrity": "345f7fec04aeb30c033459505880bc5db1be7269731124d029a3b9818cc2acd4"
+      },
+      "@esroyo/webc-lax@1.0.2": {
+        "integrity": "97d09a19966ba40e5f031581ef01acccb9401cbbfa805f939703f8a13170cbcc"
       },
       "@hono/hono@4.4.4": {
         "integrity": "38265f77059877cbee3579c419c561e90d8e8bf6861ce554832018b9998dcc8e"

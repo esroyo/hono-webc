@@ -3,14 +3,14 @@ import { honoWebc } from '../src/hono-webc.ts';
 //import { honoWebc } from '../dist/hono-webc.js';
 import { assertSnapshot } from '../dev_deps.ts';
 
-// declare module '../deps.ts' {
-//     interface ContextRenderer {
-//         (
-//             content: string | Promise<string>,
-//             data?: Record<string | number | symbol, unknown>,
-//         ): Response | Promise<Response>;
-//     }
-// }
+declare module '../deps.ts' {
+    interface ContextRenderer {
+        (
+            content: string | Promise<string>,
+            data?: Record<string | number | symbol, unknown>,
+        ): Response | Promise<Response>;
+    }
+}
 
 const baseData = {
     head: {
@@ -29,7 +29,6 @@ const baseData = {
 
 Deno.test('When middleware was created with a "*.webc" file as input', async (t) => {
     const honoWebcMiddleware = honoWebc({
-        // @ts-ignore
         data: baseData,
         defineComponents: 'test/components/**/*.webc',
         input: 'test/pages/layout.webc',
@@ -70,7 +69,6 @@ Deno.test('When middleware was created with a "*.webc" file as input', async (t)
 Deno.test('When middleware was created with an html string as input', async (t) => {
     const honoWebcMiddleware = honoWebc({
         defineComponents: 'test/components/**/*.webc',
-        // @ts-ignore
         data: baseData,
         input: `<html>
   <head>
@@ -114,7 +112,6 @@ Deno.test('When middleware was created with an html string as input', async (t) 
 });
 
 Deno.test('When middleware was created without an input', async (t) => {
-    // @ts-ignore
     const honoWebcMiddleware = honoWebc({
         defineComponents: 'test/components/**/*.webc',
     });
@@ -162,7 +159,6 @@ Deno.test('When middleware was created without an input', async (t) => {
 Deno.test('When middleware was created with bundler mode', async (t) => {
     const honoWebcMiddleware = honoWebc({
         bundle: true,
-        // @ts-ignore
         data: {
             head: baseData.head,
         },
@@ -171,6 +167,7 @@ Deno.test('When middleware was created with bundler mode', async (t) => {
   <head>
     <title @raw="head?.title">My website</title>
     <style>* { color: green; }</style>
+    <meta name="description" content="WebC is cool">
     <slot name="css"></slot>
   </head>
   <body>

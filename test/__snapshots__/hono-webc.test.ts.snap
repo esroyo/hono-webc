@@ -838,6 +838,7 @@ snapshot[`When middleware was created with bundler mode > should render correctl
 <head>
     <title>Cool</title>
     
+    <meta name="description" content="WebC is cool">
     <style>
     .person {
         border: 1px solid black;
@@ -934,11 +935,12 @@ snapshot[`When middleware was created with bundler mode > should render correctl
 `;
 
 snapshot[`When middleware was created with bundler mode > should render correctly if ctx.render is invoked with an empty string 1`] = `
-"<!doctype html>
+'<!doctype html>
 <html>
 <head>
     <title>Cool</title>
     
+    <meta name="description" content="WebC is cool">
     <style>* { color: green; }</style>
   </head>
   <body>
@@ -948,7 +950,7 @@ snapshot[`When middleware was created with bundler mode > should render correctl
 
 
 </body>
-</html>"
+</html>'
 `;
 
 snapshot[`When middleware was created with bundler mode > should render correctly if ctx.render is invoked with a "*.webc" file as content 1`] = `
@@ -957,6 +959,7 @@ snapshot[`When middleware was created with bundler mode > should render correctl
 <head>
     <title>Cool</title>
     
+    <meta name="description" content="WebC is cool">
     <style>
     .person {
         border: 1px solid black;
