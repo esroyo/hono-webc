@@ -59,8 +59,15 @@ export const buildAstNode = (
     return parse5.parseFragment(`<${tag}>${content.join('\n\n')}</${tag}>`);
 };
 
-export const buildStyleAstNode: (content: string[]) => DefaultTreeAdapterMap['documentFragment'] = buildAstNode.bind(null, 'style');
-export const buildScriptAstNode: (content: string[]) => DefaultTreeAdapterMap['documentFragment'] = buildAstNode.bind(
+export const buildStyleAstNode: (
+    content: string[],
+) => DefaultTreeAdapterMap['documentFragment'] = buildAstNode.bind(
+    null,
+    'style',
+);
+export const buildScriptAstNode: (
+    content: string[],
+) => DefaultTreeAdapterMap['documentFragment'] = buildAstNode.bind(
     null,
     'script',
 );

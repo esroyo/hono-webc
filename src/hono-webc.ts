@@ -1,7 +1,12 @@
 import path from 'node:path';
 import process from 'node:process';
 import { createMiddleware, kebabCase, WebC } from '../deps.ts';
-import type { HonoContext, HonoEnv, HonoInput, HonoMiddlewareHandler } from '../deps.ts';
+import type {
+    HonoContext,
+    HonoEnv,
+    HonoInput,
+    HonoMiddlewareHandler,
+} from '../deps.ts';
 import type { HonoWebcOptions } from './types.ts';
 import {
     buildScriptAstNode,
@@ -25,7 +30,13 @@ const isFilePath = (input?: string): input is string =>
 const createHtmlResponse = (content: string): Response =>
     new Response(content, { headers: { 'content-type': 'text/html' } });
 
-export const honoWebc = <E extends HonoEnv = any, P extends string = string, I extends HonoInput = {}>(options: HonoWebcOptions = defaultOptions()): HonoMiddlewareHandler<E, P, I> => {
+export const honoWebc = <
+    E extends HonoEnv = any,
+    P extends string = string,
+    I extends HonoInput = {},
+>(
+    options: HonoWebcOptions = defaultOptions(),
+): HonoMiddlewareHandler<E, P, I> => {
     const defineComponents = options?.defineComponents ||
         defaultOptions().defineComponents;
     const shouldBundle = options.bundle ?? defaultOptions().bundle;
