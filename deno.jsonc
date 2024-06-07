@@ -1,5 +1,5 @@
 {
-  "version": "0.0.0",
+  "version": "1.1.0",
   "name": "@esroyo/hono-webc",
   "exports": "./mod.ts",
   "tasks": {
@@ -14,8 +14,6 @@
     "singleQuote": true
   },
   "compilerOptions": {
-    // true:  enable TypeScript decorators
-    // false: enable ECMAScript decorators
     "experimentalDecorators": false
   },
   "publish": {
