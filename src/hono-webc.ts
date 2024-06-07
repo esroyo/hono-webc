@@ -1,6 +1,6 @@
 import path from 'node:path';
 import process from 'node:process';
-import { createMiddleware, HonoContext, kebabCase, parse5, WebC } from '../deps.ts';
+import { createMiddleware, type HonoContext, kebabCase, type MiddlewareHandler, WebC } from '../deps.ts';
 import type { HonoWebcOptions } from './types.ts';
 import {
     buildScriptAstNode,
@@ -21,10 +21,10 @@ const defaultOptions = () => ({
 const isFilePath = (input?: string): input is string =>
     !!input?.endsWith('.webc');
 
-const createHtmlResponse = (content: string) =>
+const createHtmlResponse = (content: string): Response =>
     new Response(content, { headers: { 'content-type': 'text/html' } });
 
-export const honoWebc = (options: HonoWebcOptions = defaultOptions()) => {
+export const honoWebc = (options: HonoWebcOptions = defaultOptions()): MiddlewareHandler => {
     const defineComponents = options?.defineComponents ||
         defaultOptions().defineComponents;
     const shouldBundle = options.bundle ?? defaultOptions().bundle;

@@ -1,12 +1,12 @@
 // @ts-ignore
-declare module 'hono' {
-    interface ContextRenderer {
-        (
-            content: string | Promise<string>,
-            data?: Record<string | number | symbol, unknown>,
-        ): Response | Promise<Response>;
-    }
-}
+// declare module 'hono' {
+//     interface ContextRenderer {
+//         (
+//             content: string | Promise<string>,
+//             data?: Record<string | number | symbol, unknown>,
+//         ): Response | Promise<Response>;
+//     }
+// }
 
 export type HonoWebcOptions = {
     /**

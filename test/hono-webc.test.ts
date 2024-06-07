@@ -3,14 +3,14 @@ import { honoWebc } from '../src/hono-webc.ts';
 //import { honoWebc } from '../dist/hono-webc.js';
 import { assertSnapshot } from '../dev_deps.ts';
 
-declare module '../deps.ts' {
-    interface ContextRenderer {
-        (
-            content: string | Promise<string>,
-            data?: Record<string | number | symbol, unknown>,
-        ): Response | Promise<Response>;
-    }
-}
+// declare module '../deps.ts' {
+//     interface ContextRenderer {
+//         (
+//             content: string | Promise<string>,
+//             data?: Record<string | number | symbol, unknown>,
+//         ): Response | Promise<Response>;
+//     }
+// }
 
 const baseData = {
     head: {
@@ -174,7 +174,7 @@ Deno.test('When middleware was created with bundler mode', async (t) => {
     <slot name="css"></slot>
   </head>
   <body>
-    <slot></slot>
+    <slot>My default content</slot>
     <slot name="js"></slot>
   </body>
 </html>
@@ -194,6 +194,23 @@ Deno.test('When middleware was created with bundler mode', async (t) => {
     <my-counter :data-initial="initial"></my-counter>
     <my-card webc:for="friend of friends" :@person="friend"></my-card>
 `,
+                    extraData,
+                );
+            });
+            const res = await app.request('/');
+            const html = await res.text();
+            await assertSnapshot(t, html);
+        },
+    );
+
+    await t.step(
+        'should render correctly if ctx.render is invoked with an empty string',
+        async (t) => {
+            const app = new Hono();
+            app.use(honoWebcMiddleware);
+            app.get('/', async (ctx) => {
+                return ctx.render(
+                    '',
                     extraData,
                 );
             });

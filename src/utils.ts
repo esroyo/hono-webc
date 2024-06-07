@@ -3,7 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import { parse5 } from '../deps.ts';
-import { DefaultTreeAdapterMap } from '../deps.ts';
+import type { DefaultTreeAdapterMap } from '../deps.ts';
 
 export function tmpComponentName(prefix: string = 'root-'): string {
     return prefix + crypto.randomUUID();
@@ -55,12 +55,12 @@ export function getDescendantsByTag(
 export const buildAstNode = (
     tag: string,
     content: string[],
-) => {
+): DefaultTreeAdapterMap['documentFragment'] => {
     return parse5.parseFragment(`<${tag}>${content.join('\n\n')}</${tag}>`);
 };
 
-export const buildStyleAstNode = buildAstNode.bind(null, 'style');
-export const buildScriptAstNode = buildAstNode.bind(
+export const buildStyleAstNode: (content: string[]) => DefaultTreeAdapterMap['documentFragment'] = buildAstNode.bind(null, 'style');
+export const buildScriptAstNode: (content: string[]) => DefaultTreeAdapterMap['documentFragment'] = buildAstNode.bind(
     null,
     'script',
 );

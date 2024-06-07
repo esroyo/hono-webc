@@ -1,26 +1,10 @@
-import * as parse5 from 'parse5';
+import { parse5 as _parse5, WebC as _WebC } from 'jsr:@esroyo/webc-lax@1.0.1';
 
-// parse5 monkeypatch
-const INSERTION_MODE_IN_HEAD = 3;
-const _startTagOutsideForeignContent =
-    parse5.Parser.prototype._startTagOutsideForeignContent;
-parse5.Parser.prototype._startTagOutsideForeignContent =
-    function __startTagOutsideForeignContent(token) {
-        if (
-            this.insertionMode === INSERTION_MODE_IN_HEAD &&
-            token.tagID === parse5.html.TAG_ID.UNKNOWN &&
-            token.tagName === 'slot'
-        ) {
-            this._appendElement(token, parse5.html.NS.HTML);
-            token.ackSelfClosing = true;
-            return;
-        }
-        return _startTagOutsideForeignContent.call(this, token);
-    };
+export const parse5 = _parse5 as unknown as typeof import('npm:parse5@7.1.2');
+export const WebC = _WebC as unknown as typeof import('npm:@11ty/webc@0.11.2');
 
-export { parse5 };
-export { type Context as HonoContext, type ContextRenderer, Hono } from 'hono';
-export { createMiddleware } from 'hono/factory';
-export { WebC } from '@11ty/webc';
-export type { DefaultTreeAdapterMap } from 'parse5';
-export { default as kebabCase } from 'lodash-es/kebabCase.js';
+export { type Context as HonoContext, type ContextRenderer, Hono } from 'jsr:@hono/hono@4.4.4';
+export { createMiddleware } from 'jsr:@hono/hono@4.4.4/factory';
+export { type MiddlewareHandler } from 'jsr:@hono/hono@4.4.4/types';
+export type { DefaultTreeAdapterMap } from 'npm:parse5@7.1.2';
+export { default as kebabCase } from 'npm:lodash-es@4.17.21/kebabCase.js';

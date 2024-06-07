@@ -933,6 +933,24 @@ snapshot[`When middleware was created with bundler mode > should render correctl
 </html>\`
 `;
 
+snapshot[`When middleware was created with bundler mode > should render correctly if ctx.render is invoked with an empty string 1`] = `
+"<!doctype html>
+<html>
+<head>
+    <title>Cool</title>
+    
+    <style>* { color: green; }</style>
+  </head>
+  <body>
+    My default content
+    <script></script>
+  
+
+
+</body>
+</html>"
+`;
+
 snapshot[`When middleware was created with bundler mode > should render correctly if ctx.render is invoked with a "*.webc" file as content 1`] = `
 \`<!doctype html>
 <html>
