@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title @raw="head?.title">My website</title>
+    <style>* { color: green; }</style>
+    <meta name="description" content="WebC is cool">
+    <slot name="css"></slot>
+  </head>
+  <body>
+    <slot>My default content</slot>
+    <slot name="js"></slot>
+    <footer>The End: deferred assets follow</footer>
+    <slot name="js.defer"></slot>
+    <slot name="css.defer"></slot>
+  </body>
+</html>
+`

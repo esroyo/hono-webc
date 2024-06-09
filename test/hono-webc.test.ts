@@ -156,7 +156,7 @@ Deno.test('When middleware was created without an input', async (t) => {
     );
 });
 
-Deno.test('When middleware was created with bundler mode', async (t) => {
+Deno.test('[Bundler mode] When middleware was created with an html string as input', async (t) => {
     const honoWebcMiddleware = honoWebc({
         bundle: true,
         data: {
@@ -173,6 +173,9 @@ Deno.test('When middleware was created with bundler mode', async (t) => {
   <body>
     <slot>My default content</slot>
     <slot name="js"></slot>
+    <footer>The End: deferred assets follow</footer>
+    <slot name="js.defer"></slot>
+    <slot name="css.defer"></slot>
   </body>
 </html>
 `,
@@ -225,6 +228,136 @@ Deno.test('When middleware was created with bundler mode', async (t) => {
             app.get('/', async (ctx) => {
                 return ctx.render(
                     'test/pages/section.webc',
+                    extraData,
+                );
+            });
+            const res = await app.request('/');
+            const html = await res.text();
+            await assertSnapshot(t, html);
+        },
+    );
+});
+
+Deno.test('[Bundler mode] When middleware was created with a "*.webc" file as input', async (t) => {
+    const honoWebcMiddleware = honoWebc({
+        bundle: true,
+        data: {
+            head: baseData.head,
+        },
+        defineComponents: 'test/components/**/*.webc',
+        input: 'test/pages/layout-bundler.webc',
+    });
+
+    const { head: _, ...extraData } = baseData;
+
+    await t.step(
+        'should render correctly if ctx.render is invoked with and html string as content',
+        async (t) => {
+            const app = new Hono();
+            app.use(honoWebcMiddleware);
+            app.get('/', async (ctx) => {
+                return ctx.render(
+                    `
+    <my-counter :data-initial="initial"></my-counter>
+    <my-card webc:for="friend of friends" :@person="friend"></my-card>
+`,
+                    extraData,
+                );
+            });
+            const res = await app.request('/');
+            const html = await res.text();
+            await assertSnapshot(t, html);
+        },
+    );
+
+    await t.step(
+        'should render correctly if ctx.render is invoked with an empty string',
+        async (t) => {
+            const app = new Hono();
+            app.use(honoWebcMiddleware);
+            app.get('/', async (ctx) => {
+                return ctx.render(
+                    '',
+                    extraData,
+                );
+            });
+            const res = await app.request('/');
+            const html = await res.text();
+            await assertSnapshot(t, html);
+        },
+    );
+
+    await t.step(
+        'should render correctly if ctx.render is invoked with a "*.webc" file as content',
+        async (t) => {
+            const app = new Hono();
+            app.use(honoWebcMiddleware);
+            app.get('/', async (ctx) => {
+                return ctx.render(
+                    'test/pages/section.webc',
+                    extraData,
+                );
+            });
+            const res = await app.request('/');
+            const html = await res.text();
+            await assertSnapshot(t, html);
+        },
+    );
+});
+
+Deno.test('[Bundler mode] When middleware was created without an input', async (t) => {
+    const honoWebcMiddleware = honoWebc({
+        bundle: true,
+        data: {
+            head: baseData.head,
+        },
+        defineComponents: 'test/components/**/*.webc',
+    });
+
+    const { head: _, ...extraData } = baseData;
+
+    await t.step(
+        'should render correctly if ctx.render is invoked with and html string as content',
+        async (t) => {
+            const app = new Hono();
+            app.use(honoWebcMiddleware);
+            app.get('/', async (ctx) => {
+                return ctx.render(
+                    `
+<html>
+  <head>
+    <title @raw="head?.title">My website</title>
+    <style>* { color: green; }</style>
+    <meta name="description" content="WebC is cool">
+    <slot name="css"></slot>
+  </head>
+  <body>
+    <my-counter :data-initial="initial"></my-counter>
+    <my-card webc:for="friend of friends" :@person="friend"></my-card>
+    <slot name="js"></slot>
+    <footer>The End: deferred assets follow</footer>
+    <slot name="js.defer"></slot>
+    <slot name="css.defer"></slot>
+  </body>
+</html>
+`,
+                    extraData,
+                );
+            });
+            const res = await app.request('/');
+            const html = await res.text();
+            await assertSnapshot(t, html);
+        },
+    );
+
+    await t.step(
+        'should render correctly if ctx.render is invoked with a "*.webc" file as content',
+        async (t) => {
+            const app = new Hono();
+            app.use(honoWebcMiddleware);
+            app.get('/', async (ctx) => {
+                return ctx.render(
+                    'test/pages/standalone-bundler.webc',
                     extraData,
                 );
             });

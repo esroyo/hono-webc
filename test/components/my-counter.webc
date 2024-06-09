@@ -30,5 +30,7 @@
       this.shadowRoot.querySelector('span').innerHTML = newValue;
     }
   }
+</script>
+<script webc:bucket="defer">
   customElements.define('my-counter', MyCounter);
 </script>

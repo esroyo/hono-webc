@@ -12,3 +12,9 @@
         padding: 1em;
     }
 </style>
+
+<style webc:bucket="defer">
+    .person {
+        color: pink;
+    }
+</style>

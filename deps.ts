@@ -1,4 +1,4 @@
-import { parse5 as _parse5, WebC as _WebC } from 'jsr:@esroyo/webc-lax@1.0.4';
+import { parse5 as _parse5, WebC as _WebC } from 'jsr:@esroyo/webc-lax@1.0.5';
 
 export const parse5 = _parse5 as unknown as typeof import('npm:parse5@7.1.2');
 export const WebC = _WebC as unknown as typeof import('npm:@11ty/webc@0.11.2');

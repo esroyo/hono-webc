@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title @raw="head?.title">My website</title>
+    <style>* { color: green; }</style>
+    <meta name="description" content="WebC is cool">
+    <slot name="css"></slot>
+  </head>
+  <body>
+    <my-counter :data-initial="initial"></my-counter>
+    <my-card webc:for="friend of friends" :@person="friend"></my-card>
+    <slot name="js"></slot>
+    <footer>The End: deferred assets follow</footer>
+    <slot name="js.defer"></slot>
+    <slot name="css.defer"></slot>
+  </body>
+</html>

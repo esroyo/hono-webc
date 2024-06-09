@@ -6,6 +6,7 @@
       "jsr:@esroyo/webc-lax@1.0.1": "jsr:@esroyo/webc-lax@1.0.1",
       "jsr:@esroyo/webc-lax@1.0.2": "jsr:@esroyo/webc-lax@1.0.2",
       "jsr:@esroyo/webc-lax@1.0.4": "jsr:@esroyo/webc-lax@1.0.4",
+      "jsr:@esroyo/webc-lax@1.0.5": "jsr:@esroyo/webc-lax@1.0.5",
       "jsr:@hono/hono@4.4.4": "jsr:@hono/hono@4.4.4",
       "jsr:@kitsonk/kv-toolbox@0.18.0": "jsr:@kitsonk/kv-toolbox@0.18.0",
       "jsr:@kitsonk/kv-toolbox@0.9.0": "jsr:@kitsonk/kv-toolbox@0.9.0",
@@ -59,6 +60,9 @@
       },
       "@esroyo/webc-lax@1.0.4": {
         "integrity": "9bad60cc35e31bbf4e96e78cde4f9ba0351afe680700419a03f72c5896959155"
+      },
+      "@esroyo/webc-lax@1.0.5": {
+        "integrity": "24c678c989fadf291022e3be2efdf65f084e187b5042adb7cb6e664a0aaa2106"
       },
       "@hono/hono@4.4.4": {
         "integrity": "38265f77059877cbee3579c419c561e90d8e8bf6861ce554832018b9998dcc8e"

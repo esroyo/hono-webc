@@ -56,7 +56,10 @@ export const buildAstNode = (
     tag: string,
     content: string[],
 ): DefaultTreeAdapterMap['documentFragment'] => {
-    return parse5.parseFragment(`<${tag}>${content.join('\n\n')}</${tag}>`);
+    const htmlContent = content.length
+        ? `<${tag}>${content.join('\n\n')}</${tag}>`
+        : '';
+    return parse5.parseFragment(htmlContent);
 };
 
 export const buildStyleAstNode: (
@@ -90,8 +93,7 @@ export const keepAssetsSlots = (htmlContent: string): string => {
         if (
             slotTag.attrs.find((attr) =>
                 attr.name === 'name' &&
-                (attr.value === 'css' || attr.value === 'js' ||
-                    attr.value.startsWith('bucket.'))
+                attr.value.match(/^(css|js)\.?/)
             )
         ) {
             slotTag.attrs.push({ name: 'webc:keep', value: '' });

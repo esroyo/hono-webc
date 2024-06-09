@@ -64,166 +64,96 @@ export const honoWebc = <
             layoutComponentPath,
         };
     })();
-    const withLayout = async (
-        contentOrInputPath: string | Promise<string>,
-        extraData: HonoWebcOptions['data'] = null,
-    ) => {
-        const page = new WebC();
-        page.setBundlerMode(shouldBundle);
-        if (defineComponents) {
-            page.defineComponents(defineComponents);
-        }
-        const data = {
-            ...structuredClone(options.data),
-            ...structuredClone(extraData),
-        };
-
-        const buckets: Record<'css' | 'js', Record<string, string[]>> = {
-            css: {},
-            js: {},
-        };
-        const css: string[] = [];
-        const js: string[] = [];
-
-        const contentOrPath = await Promise.resolve(contentOrInputPath);
-        const isDirectContent = !isFilePath(contentOrPath);
-
-        const fragmentContent = isDirectContent
-            ? contentOrPath
-            : await readFile(contentOrPath);
-        const {
-            layoutComponentName,
-            layoutComponentPath,
-        } = await setupPromise;
-        page.defineComponents(layoutComponentPath);
-        const props = Object.keys(data).map((key) =>
-            `:@${kebabCase(key)}="${key}"`
-        ).join(' ');
-        page.setContent(
-            `<${layoutComponentName} ${props} webc:nokeep>${fragmentContent}</${layoutComponentName}>`,
-        );
-
-        const compiled = await page.compile({ data });
-        css.push(...compiled.css);
-        js.push(...compiled.js);
-        for (const assetKind of ['css', 'js'] as const) {
-            if (compiled.buckets?.[assetKind]) {
-                for (
-                    const [key, value] of Object.entries(
-                        compiled.buckets[assetKind],
-                    )
-                ) {
-                    if (!buckets[assetKind][key]) {
-                        buckets[assetKind][key] = [];
-                    }
-                    if (Array.isArray(value)) {
-                        buckets[assetKind][key].push(...value);
-                    }
-                }
-            }
-        }
-
-        if (!page.bundlerMode) {
-            return createHtmlResponse(compiled.html);
-        } else {
-            const styles = [
-                ['css', css] as const,
-                ...Object.entries(buckets.css || {}).map((
-                    pair,
-                ) => [`bucket.css.${pair[0]}`, pair[1]] as const),
-            ].map((pair) => [pair[0], buildStyleAstNode(pair[1])]);
-            const scripts = [
-                ['js', js] as const,
-                ...Object.entries(buckets.js || {}).map((
-                    pair,
-                ) => [`bucket.js.${pair[0]}`, pair[1]] as const),
-            ].map((pair) => [pair[0], buildScriptAstNode(pair[1])]);
-            const pageBundle = new WebC();
-            pageBundle.setContent(compiled.html);
-            const slots = Object.fromEntries([...styles, ...scripts]);
-            const compiledBundle = await pageBundle.compile({
-                data,
-                slots,
-            });
-            return createHtmlResponse(compiledBundle.html);
-        }
-    };
-    const withoutLayout = async (
-        contentOrInputPath: string | Promise<string>,
-        extraData: HonoWebcOptions['data'] = null,
-    ) => {
-        const page = new WebC();
-        page.setBundlerMode(shouldBundle);
-        if (defineComponents) {
-            page.defineComponents(defineComponents);
-        }
-        const data = {
-            ...structuredClone(options.data),
-            ...structuredClone(extraData),
-        };
-        const buckets: Record<'css' | 'js', Record<string, string[]>> = {
-            css: {},
-            js: {},
-        };
-        const css: string[] = [];
-        const js: string[] = [];
-
-        const contentOrPath = await Promise.resolve(contentOrInputPath);
-        const isDirectContent = !isFilePath(contentOrPath);
-        let content = isDirectContent
-            ? contentOrPath
-            : await readFile(contentOrPath);
-        if (shouldBundle) {
-            content = keepAssetsSlots(content);
-        }
-        page.setContent(content);
-
-        const compiled = await page.compile({ data });
-        css.push(...compiled.css);
-        js.push(...compiled.js);
-        for (const assetKind of ['css', 'js'] as const) {
-            if (compiled.buckets?.[assetKind]) {
-                for (
-                    const [key, value] of Object.entries(
-                        compiled.buckets[assetKind],
-                    )
-                ) {
-                    if (!buckets[assetKind][key]) {
-                        buckets[assetKind][key] = [];
-                    }
-                    if (Array.isArray(value)) {
-                        buckets[assetKind][key].push(...value);
-                    }
-                }
-            }
-        }
-        if (!page.bundlerMode) {
-            return createHtmlResponse(compiled.html);
-        } else {
-            const styles = [
-                ['css', css] as const,
-                ...Object.entries(buckets.css || {}).map((
-                    pair,
-                ) => [`bucket.css.${pair[0]}`, pair[1]] as const),
-            ].map((pair) => [pair[0], buildStyleAstNode(pair[1])]);
-            const scripts = [
-                ['js', js] as const,
-                ...Object.entries(buckets.js || {}).map((
-                    pair,
-                ) => [`bucket.js.${pair[0]}`, pair[1]] as const),
-            ].map((pair) => [pair[0], buildScriptAstNode(pair[1])]);
-            const slots = Object.fromEntries([...styles, ...scripts]);
-            const pageBundle = new WebC();
-            pageBundle.setContent(compiled.html);
-            const compiledBundle = await pageBundle.compile({
-                data,
-                slots,
-            });
-            return createHtmlResponse(compiledBundle.html);
-        }
-    };
     const handler = async (ctx: HonoContext, next: () => Promise<void>) => {
-        ctx.setRenderer(hasLayout ? withLayout : withoutLayout);
+        ctx.setRenderer(async (
+            contentOrInputPath: string | Promise<string>,
+            extraData: HonoWebcOptions['data'] = null,
+        ) => {
+            const page = new WebC();
+            page.setBundlerMode(shouldBundle);
+            if (defineComponents) {
+                page.defineComponents(defineComponents);
+            }
+            const data = {
+                ...structuredClone(options.data),
+                ...structuredClone(extraData),
+            };
+            const buckets: Record<'css' | 'js', Record<string, string[]>> = {
+                css: {},
+                js: {},
+            };
+            const css: string[] = [];
+            const js: string[] = [];
+
+            const contentOrPath = await Promise.resolve(contentOrInputPath);
+            const isDirectContent = !isFilePath(contentOrPath);
+            let fragmentContent = isDirectContent
+                ? contentOrPath
+                : await readFile(contentOrPath);
+
+            if (!hasLayout) {
+                if (shouldBundle) {
+                    fragmentContent = keepAssetsSlots(fragmentContent);
+                }
+                page.setContent(fragmentContent);
+            } else {
+                const {
+                    layoutComponentName,
+                    layoutComponentPath,
+                } = await setupPromise;
+                page.defineComponents(layoutComponentPath);
+                const props = Object.keys(data).map((key) =>
+                    `:@${kebabCase(key)}="${key}"`
+                ).join(' ');
+                page.setContent(
+                    `<body><${layoutComponentName} ${props} webc:nokeep>${fragmentContent}</${layoutComponentName}></body>`,
+                );
+            }
+
+            const compiled = await page.compile({ data });
+            css.push(...compiled.css);
+            js.push(...compiled.js);
+            for (const assetKind of ['css', 'js'] as const) {
+                if (compiled.buckets?.[assetKind]) {
+                    for (
+                        const [key, value] of Object.entries(
+                            compiled.buckets[assetKind],
+                        )
+                    ) {
+                        if (!buckets[assetKind][key]) {
+                            buckets[assetKind][key] = [];
+                        }
+                        if (Array.isArray(value)) {
+                            buckets[assetKind][key].push(...value);
+                        }
+                    }
+                }
+            }
+            if (!page.bundlerMode) {
+                return createHtmlResponse(compiled.html);
+            } else {
+                const styles = [
+                    ['css', css] as const,
+                    ...Object.entries(buckets.css).map((
+                        pair,
+                    ) => [`css.${pair[0]}`, pair[1]] as const),
+                ].map((pair) => [pair[0], buildStyleAstNode(pair[1])]);
+                const scripts = [
+                    ['js', js] as const,
+                    ...Object.entries(buckets.js).map((
+                        pair,
+                    ) => [`js.${pair[0]}`, pair[1]] as const),
+                ].map((pair) => [pair[0], buildScriptAstNode(pair[1])]);
+                const slots = Object.fromEntries([...styles, ...scripts]);
+                const pageBundle = new WebC();
+                pageBundle.setContent(compiled.html);
+                const compiledBundle = await pageBundle.compile({
+                    data,
+                    slots,
+                });
+                return createHtmlResponse(compiledBundle.html);
+            }
+        });
         await next();
     };
 
