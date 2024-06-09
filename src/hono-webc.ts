@@ -95,7 +95,10 @@ export const honoWebc = <
                 if (shouldBundle) {
                     fragmentContent = keepAssetsSlots(fragmentContent);
                 }
-                page.setContent(fragmentContent);
+                page.setContent(
+                    fragmentContent,
+                    isDirectContent ? undefined : contentOrPath,
+                );
             } else {
                 const {
                     layoutComponentName,
@@ -107,6 +110,7 @@ export const honoWebc = <
                 ).join(' ');
                 page.setContent(
                     `<body><${layoutComponentName} ${props} webc:nokeep>${fragmentContent}</${layoutComponentName}></body>`,
+                    isDirectContent ? undefined : contentOrPath,
                 );
             }
 

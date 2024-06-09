@@ -18,7 +18,12 @@ export function tmpFile(
 }
 
 export function readFile(filePath: string): Promise<string> {
-    return fs.readFile(path.join(process.cwd(), filePath), 'utf8');
+    return fs.readFile(
+        filePath.startsWith('/')
+            ? filePath
+            : path.join(process.cwd(), filePath),
+        'utf8',
+    );
 }
 
 export function writeFile(filePath: string, data: string): Promise<void> {
