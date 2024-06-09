@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.1.5](https://github.com/esroyo/hono-webc/compare/v1.1.4...v1.1.5) (2024-06-09)
+
+
+### Bug Fixes
+
+* avoid resolving absolute paths ([31170e4](https://github.com/esroyo/hono-webc/commit/31170e45e528f583f5f4a9926f21ec4b8d22ab79))
+
 ## [1.1.4](https://github.com/esroyo/hono-webc/compare/v1.1.3...v1.1.4) (2024-06-09)
 
 
