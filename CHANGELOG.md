@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.0](https://github.com/esroyo/hono-webc/compare/v1.1.5...v1.2.0) (2024-06-12)
+
+
+### Features
+
+* include ctx.var contents in webc component data ([ebb43e0](https://github.com/esroyo/hono-webc/commit/ebb43e081415558bf0c9e085c85f3b0268fbe90b))
+
 ## [1.1.5](https://github.com/esroyo/hono-webc/compare/v1.1.4...v1.1.5) (2024-06-09)
 
 
