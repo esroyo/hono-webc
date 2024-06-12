@@ -1,5 +1,10 @@
 export const snapshot = {};
 
+snapshot[`Should make "ctx.var" available to WebC as data 1`] = `
+"<span>Hello, 42!</span>
+"
+`;
+
 snapshot[`When middleware was created with a "*.webc" file as input > should render correctly if ctx.render is invoked with and html string as content 1`] = `
 \`<!doctype html>
 <html>

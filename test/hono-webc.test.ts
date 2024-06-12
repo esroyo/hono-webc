@@ -1,4 +1,4 @@
-import { Hono } from '../deps.ts';
+import { createMiddleware, Hono } from '../deps.ts';
 import { honoWebc } from '../src/hono-webc.ts';
 //import { honoWebc } from '../dist/hono-webc.js';
 import { assertSnapshot } from '../dev_deps.ts';
@@ -26,6 +26,33 @@ const baseData = {
         { name: 'Ross' },
     ],
 };
+
+Deno.test('Should make "ctx.var" available to WebC as data', async (t) => {
+    type Env = {
+        Variables: {
+            secret: string;
+        };
+    };
+    const app = new Hono();
+    const honoWebcMiddleware = honoWebc({
+        defineComponents: 'test/components/**/*.webc',
+    });
+    const injetMsgMiddleware = createMiddleware<Env>(async (ctx, next) => {
+        ctx.set('secret', 'Hello, 42!');
+        await next();
+    });
+    app.use(injetMsgMiddleware);
+    app.use(honoWebcMiddleware);
+
+    app.get('/echo', (ctx) => {
+        return ctx.render(`<echo-msg :msg="secret"></echo-msg>`);
+    });
+
+    const res = await app.request('/echo');
+    const html = await res.text();
+
+    await assertSnapshot(t, html);
+});
 
 Deno.test('When middleware was created with a "*.webc" file as input', async (t) => {
     const honoWebcMiddleware = honoWebc({

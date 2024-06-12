@@ -75,6 +75,7 @@ export const honoWebc = <
                 page.defineComponents(defineComponents);
             }
             const data = {
+                ...ctx.var,
                 ...structuredClone(options.data),
                 ...structuredClone(extraData),
             };
