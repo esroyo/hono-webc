@@ -101,17 +101,24 @@ export const honoWebc = <
                     isDirectContent ? undefined : contentOrPath,
                 );
             } else {
+                const props = Object.keys(data).map((key) =>
+                    `:@${kebabCase(key)}="${key}"`
+                ).join(' ');
                 const {
                     layoutComponentName,
                     layoutComponentPath,
                 } = await setupPromise;
                 page.defineComponents(layoutComponentPath);
-                const props = Object.keys(data).map((key) =>
-                    `:@${kebabCase(key)}="${key}"`
-                ).join(' ');
+                if (!isDirectContent) {
+                    const fragmentComponentName = tmpComponentName('fragment');
+                    page.defineComponents({
+                        [fragmentComponentName]: contentOrPath,
+                    });
+                    fragmentContent =
+                        `<${fragmentComponentName} ${props} webc:nokeep></${fragmentComponentName}>`;
+                }
                 page.setContent(
                     `<body><${layoutComponentName} ${props} webc:nokeep>${fragmentContent}</${layoutComponentName}></body>`,
-                    isDirectContent ? undefined : contentOrPath,
                 );
             }
 
