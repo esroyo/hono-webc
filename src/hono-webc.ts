@@ -56,7 +56,12 @@ export const honoWebc = <
             if (options.bundle) {
                 layoutContent = keepAssetsSlots(layoutContent);
             }
-            await writeFile(layoutComponentPath, layoutContent);
+            try {
+                await writeFile(layoutComponentPath, layoutContent);
+            } catch (_error) {
+                layoutComponentPath = '.' + layoutComponentPath.slice(1);
+                await writeFile(layoutComponentPath, layoutContent);
+            }
         }
         return {
             layoutContent,
