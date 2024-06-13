@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.2](https://github.com/esroyo/hono-webc/compare/v1.2.1...v1.2.2) (2024-06-13)
+
+
+### Bug Fixes
+
+* add alternative tmp write path ([7c83803](https://github.com/esroyo/hono-webc/commit/7c83803f9b946414ea67d6742a682e630504ed43))
+
 ## [1.2.1](https://github.com/esroyo/hono-webc/compare/v1.2.0...v1.2.1) (2024-06-13)
 
 
