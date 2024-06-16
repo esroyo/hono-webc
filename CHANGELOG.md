@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.3.0](https://github.com/esroyo/hono-webc/compare/v1.2.2...v1.3.0) (2024-06-16)
+
+
+### Features
+
+* no need for write permissions ([b2a7dc8](https://github.com/esroyo/hono-webc/commit/b2a7dc88c77f3d331c09a7c7c1d12ba222267957))
+
 ## [1.2.2](https://github.com/esroyo/hono-webc/compare/v1.2.1...v1.2.2) (2024-06-13)
 
 
