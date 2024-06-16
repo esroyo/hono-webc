@@ -1,5 +1,4 @@
 import fs from 'node:fs/promises';
-import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import { parse5 } from '../deps.ts';
@@ -9,14 +8,6 @@ export function tmpComponentName(prefix: string = 'root-'): string {
     return prefix + crypto.randomUUID();
 }
 
-export function tmpFile(
-    tmpComponentName: string,
-    suffix: string = '.webc',
-    tmpdir: string = os.tmpdir(),
-): string {
-    return path.join(tmpdir, tmpComponentName + suffix);
-}
-
 export function readFile(filePath: string): Promise<string> {
     return fs.readFile(
         filePath.startsWith('/')
@@ -24,10 +15,6 @@ export function readFile(filePath: string): Promise<string> {
             : path.join(process.cwd(), filePath),
         'utf8',
     );
-}
-
-export function writeFile(filePath: string, data: string): Promise<void> {
-    return fs.writeFile(filePath, data);
 }
 
 export function getDescendantsByTag<

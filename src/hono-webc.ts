@@ -14,9 +14,7 @@ import {
     keepAssetsSlots,
     readFile,
     tmpComponentName,
-    tmpFile,
 } from './utils.ts';
-import { writeFile } from './utils.ts';
 
 const defaultOptions = () => ({
     defineComponents: path.join(process.cwd(), 'src/components/**/*.webc'),
@@ -39,15 +37,14 @@ export const honoWebc = <
 ): HonoMiddlewareHandler<E, P, I> => {
     const defineComponents = options?.defineComponents ||
         defaultOptions().defineComponents;
+    const internalComponents: Record<string, string> = {};
     const shouldBundle = options.bundle ?? defaultOptions().bundle;
     const hasLayout = !!(options.input);
     const setupPromise = (async () => {
         let layoutContent: string = '';
         let layoutComponentName: string = '';
-        let layoutComponentPath: string = '';
         if (hasLayout) {
             layoutComponentName = tmpComponentName();
-            layoutComponentPath = tmpFile(layoutComponentName);
             if (hasLayout && isFilePath(options.input)) {
                 layoutContent = await readFile(options.input);
             } else if (options.input) {
@@ -56,17 +53,11 @@ export const honoWebc = <
             if (options.bundle) {
                 layoutContent = keepAssetsSlots(layoutContent);
             }
-            try {
-                await writeFile(layoutComponentPath, layoutContent);
-            } catch (_error) {
-                layoutComponentPath = '.' + layoutComponentPath.slice(1);
-                await writeFile(layoutComponentPath, layoutContent);
-            }
+            internalComponents[layoutComponentName] = layoutContent;
         }
         return {
             layoutContent,
             layoutComponentName,
-            layoutComponentPath,
         };
     })();
     const handler = async (ctx: HonoContext, next: () => Promise<void>) => {
@@ -111,9 +102,8 @@ export const honoWebc = <
                 ).join(' ');
                 const {
                     layoutComponentName,
-                    layoutComponentPath,
                 } = await setupPromise;
-                page.defineComponents(layoutComponentPath);
+                page.defineComponents(internalComponents);
                 if (!isDirectContent) {
                     const fragmentComponentName = tmpComponentName('fragment');
                     page.defineComponents({

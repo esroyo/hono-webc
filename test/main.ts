@@ -1,6 +1,6 @@
 import { Hono } from 'jsr:@hono/hono';
 import { serve } from '../dev_deps.ts';
-import { honoWebc } from '../dist/hono-webc.js';
+import { honoWebc } from '../src/hono-webc.ts';
 
 const app = new Hono();
 app.use(honoWebc({
