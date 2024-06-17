@@ -1,11 +1,3 @@
-# WebC middleware for Hono
-[![JSR](https://jsr.io/badges/@esroyo/hono-webc)](https://jsr.io/@esroyo/hono-webc) [![JSR Score](https://jsr.io/badges/@esroyo/hono-webc/score)](https://jsr.io/@esroyo/hono-webc) [![codecov](https://codecov.io/gh/esroyo/hono-webc/graph/badge.svg?token=6TD9BUCUDP)](https://codecov.io/gh/esroyo/hono-webc)
-
-Enables usage of 🔧 [WebC](https://11ty.rocks/posts/introduction-webc/) components/pages in 🔥 [Hono](https://hono.dev/).
-
-# Basic usage
-
-```ts
 import { Hono } from 'jsr:@hono/hono';
 import { createWebcMiddleware } from 'jsr:@esroyo/hono-webc';
 
@@ -39,4 +31,3 @@ Deno.serve(app.fetch, { port: 8000 });
 </html>
 
 */
-```

@@ -1,1 +1,2 @@
-export * from './src/hono-webc.ts';
+export * from './src/types.ts';
+export * from './src/create-webc-middleware.ts';

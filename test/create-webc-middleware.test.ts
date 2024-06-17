@@ -1,6 +1,5 @@
 import { createMiddleware, Hono } from '../deps.ts';
-import { honoWebc } from '../src/hono-webc.ts';
-//import { honoWebc } from '../dist/hono-webc.js';
+import { createWebcMiddleware } from '../src/create-webc-middleware.ts';
 import { assertSnapshot } from '../dev_deps.ts';
 
 declare module '../deps.ts' {
@@ -34,15 +33,15 @@ Deno.test('Should make "ctx.var" available to WebC as data', async (t) => {
         };
     };
     const app = new Hono();
-    const honoWebcMiddleware = honoWebc({
+    const webcMiddleware = createWebcMiddleware({
         defineComponents: 'test/components/**/*.webc',
     });
-    const injetMsgMiddleware = createMiddleware<Env>(async (ctx, next) => {
+    const injectMsgMiddleware = createMiddleware<Env>(async (ctx, next) => {
         ctx.set('secret', 'Hello, 42!');
         await next();
     });
-    app.use(injetMsgMiddleware);
-    app.use(honoWebcMiddleware);
+    app.use(injectMsgMiddleware);
+    app.use(webcMiddleware);
 
     app.get('/echo', (ctx) => {
         return ctx.render(`<echo-msg :msg="secret"></echo-msg>`);
@@ -55,7 +54,7 @@ Deno.test('Should make "ctx.var" available to WebC as data', async (t) => {
 });
 
 Deno.test('When middleware was created with a "*.webc" file as input', async (t) => {
-    const honoWebcMiddleware = honoWebc({
+    const webcMiddleware = createWebcMiddleware({
         data: baseData,
         defineComponents: 'test/components/**/*.webc',
         input: 'test/pages/layout.webc',
@@ -65,7 +64,7 @@ Deno.test('When middleware was created with a "*.webc" file as input', async (t)
         'should render correctly if ctx.render is invoked with and html string as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(`
     <my-counter :data-initial="initial"></my-counter>
@@ -82,7 +81,7 @@ Deno.test('When middleware was created with a "*.webc" file as input', async (t)
         'should render correctly if ctx.render is invoked with a "*.webc" file as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render('test/pages/section.webc');
             });
@@ -94,7 +93,7 @@ Deno.test('When middleware was created with a "*.webc" file as input', async (t)
 });
 
 Deno.test('When middleware was created with an html string as input', async (t) => {
-    const honoWebcMiddleware = honoWebc({
+    const webcMiddleware = createWebcMiddleware({
         defineComponents: 'test/components/**/*.webc',
         data: baseData,
         input: `<html>
@@ -110,7 +109,7 @@ Deno.test('When middleware was created with an html string as input', async (t) 
         'should render correctly if ctx.render is invoked with and html string as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(`
     <my-counter :data-initial="initial"></my-counter>
@@ -127,7 +126,7 @@ Deno.test('When middleware was created with an html string as input', async (t) 
         'should render correctly if ctx.render is invoked with a "*.webc" file as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render('test/pages/section.webc');
             });
@@ -139,7 +138,7 @@ Deno.test('When middleware was created with an html string as input', async (t) 
 });
 
 Deno.test('When middleware was created without an input', async (t) => {
-    const honoWebcMiddleware = honoWebc({
+    const webcMiddleware = createWebcMiddleware({
         defineComponents: 'test/components/**/*.webc',
     });
 
@@ -147,7 +146,7 @@ Deno.test('When middleware was created without an input', async (t) => {
         'should render correctly if ctx.render is invoked with and html string as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(
                     `<html>
@@ -172,7 +171,7 @@ Deno.test('When middleware was created without an input', async (t) => {
         'should render correctly if ctx.render is invoked with a "*.webc" file as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render('test/pages/standalone.webc', baseData);
             });
@@ -184,7 +183,7 @@ Deno.test('When middleware was created without an input', async (t) => {
 });
 
 Deno.test('[Bundler mode] When middleware was created with an html string as input', async (t) => {
-    const honoWebcMiddleware = honoWebc({
+    const webcMiddleware = createWebcMiddleware({
         bundle: true,
         data: {
             head: baseData.head,
@@ -214,7 +213,7 @@ Deno.test('[Bundler mode] When middleware was created with an html string as inp
         'should render correctly if ctx.render is invoked with and html string as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(
                     `
@@ -234,7 +233,7 @@ Deno.test('[Bundler mode] When middleware was created with an html string as inp
         'should render correctly if ctx.render is invoked with an empty string',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(
                     '',
@@ -251,7 +250,7 @@ Deno.test('[Bundler mode] When middleware was created with an html string as inp
         'should render correctly if ctx.render is invoked with a "*.webc" file as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(
                     'test/pages/section.webc',
@@ -266,7 +265,7 @@ Deno.test('[Bundler mode] When middleware was created with an html string as inp
 });
 
 Deno.test('[Bundler mode] When middleware was created with a "*.webc" file as input', async (t) => {
-    const honoWebcMiddleware = honoWebc({
+    const webcMiddleware = createWebcMiddleware({
         bundle: true,
         data: {
             head: baseData.head,
@@ -281,7 +280,7 @@ Deno.test('[Bundler mode] When middleware was created with a "*.webc" file as in
         'should render correctly if ctx.render is invoked with and html string as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(
                     `
@@ -301,7 +300,7 @@ Deno.test('[Bundler mode] When middleware was created with a "*.webc" file as in
         'should render correctly if ctx.render is invoked with an empty string',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(
                     '',
@@ -318,7 +317,7 @@ Deno.test('[Bundler mode] When middleware was created with a "*.webc" file as in
         'should render correctly if ctx.render is invoked with a "*.webc" file as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(
                     'test/pages/section.webc',
@@ -333,7 +332,7 @@ Deno.test('[Bundler mode] When middleware was created with a "*.webc" file as in
 });
 
 Deno.test('[Bundler mode] When middleware was created without an input', async (t) => {
-    const honoWebcMiddleware = honoWebc({
+    const webcMiddleware = createWebcMiddleware({
         bundle: true,
         data: {
             head: baseData.head,
@@ -347,7 +346,7 @@ Deno.test('[Bundler mode] When middleware was created without an input', async (
         'should render correctly if ctx.render is invoked with and html string as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(
                     `
@@ -381,7 +380,7 @@ Deno.test('[Bundler mode] When middleware was created without an input', async (
         'should render correctly if ctx.render is invoked with a "*.webc" file as content',
         async (t) => {
             const app = new Hono();
-            app.use(honoWebcMiddleware);
+            app.use(webcMiddleware);
             app.get('/', async (ctx) => {
                 return ctx.render(
                     'test/pages/standalone-bundler.webc',

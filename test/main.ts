@@ -1,9 +1,9 @@
 import { Hono } from 'jsr:@hono/hono';
 import { serve } from '../dev_deps.ts';
-import { honoWebc } from '../src/hono-webc.ts';
+import { createWebcMiddleware } from '../src/create-webc-middleware.ts';
 
 const app = new Hono();
-app.use(honoWebc({
+app.use(createWebcMiddleware({
     input: 'test/pages/layout.webc',
     defineComponents: 'test/components/**/*.webc',
 }));
@@ -32,7 +32,7 @@ app.get('/', async (ctx) => {
 });
 
 const app2 = new Hono();
-app2.use(honoWebc({
+app2.use(createWebcMiddleware({
     defineComponents: 'test/components/**/*.webc',
 }));
 app2.get('/', async (ctx) => {
@@ -53,7 +53,7 @@ app2.get('/', async (ctx) => {
 });
 
 const app3 = new Hono();
-app3.use(honoWebc({
+app3.use(createWebcMiddleware({
     bundle: true,
     defineComponents: 'test/components/**/*.webc',
     input: `

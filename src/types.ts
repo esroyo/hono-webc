@@ -1,13 +1,3 @@
-// @ts-ignore
-// declare module 'hono' {
-//     interface ContextRenderer {
-//         (
-//             content: string | Promise<string>,
-//             data?: Record<string | number | symbol, unknown>,
-//         ): Response | Promise<Response>;
-//     }
-// }
-
 export type HonoWebcOptions = {
     /**
      * Enables WebC Bundler Mode to aggregate CSS and JS found in WebC components.
@@ -50,5 +40,4 @@ export type HonoWebcOptions = {
      * (`<p>Hello!</p>`).
      */
     input?: string;
-    inputPath?: string;
 };

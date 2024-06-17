@@ -28,7 +28,29 @@ const isFilePath = (input?: string): input is string =>
 const createHtmlResponse = (content: string): Response =>
     new Response(content, { headers: { 'content-type': 'text/html' } });
 
-export const honoWebc = <
+/**
+ * Creates a middleware that will set WebC as a renderer,
+ * therefore allowing to use WebC components in the Hono
+ * context [render](https://hono.dev/api/context#render-setrenderer) function.
+ * 
+ * The render function expects either literal webc/html contents or a file path
+ * to a webc/html file, with an optional data object.
+ *
+ * @example
+ * ```js
+ * app.get('/', async (ctx) => {
+ *   return ctx.render('<hello-world :msg="msg"></hello-world>', { msg: 'Hello, WebC!' });
+ * });
+ * ```
+ *
+ * @example
+ * ```js
+ * app.get('/', async (ctx) => {
+ *   return ctx.render('src/pages/hello.webc', { msg: 'Hello, WebC!' });
+ * });
+ * ```
+ */
+export const createWebcMiddleware = <
     E extends HonoEnv = any,
     P extends string = string,
     I extends HonoInput = {},
