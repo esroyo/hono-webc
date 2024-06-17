@@ -32,7 +32,7 @@ const createHtmlResponse = (content: string): Response =>
  * Creates a middleware that will set WebC as a renderer,
  * therefore allowing to use WebC components in the Hono
  * context [render](https://hono.dev/api/context#render-setrenderer) function.
- * 
+ *
  * The render function expects either literal webc/html contents or a file path
  * to a webc/html file, with an optional data object.
  *
