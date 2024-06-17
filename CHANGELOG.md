@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.0](https://github.com/esroyo/hono-webc/compare/v1.3.0...v2.0.0) (2024-06-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* export is renamed as `createWebcMiddleware`
+
+### Other
+
+* export is renamed as `createWebcMiddleware` ([0d74705](https://github.com/esroyo/hono-webc/commit/0d74705d98537d410c0ab73fbb5718f38b68ef59))
+
 ## [1.3.0](https://github.com/esroyo/hono-webc/compare/v1.2.2...v1.3.0) (2024-06-16)
 
 
