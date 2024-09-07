@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file. See [commit
 
 ## [2.0.4](https://github.com/esroyo/hono-webc/compare/v2.0.3...v2.0.4) (2024-09-07)
 
+
+### Other
+
+* remove structuredClone usage ([d84ef76](https://github.com/esroyo/hono-webc/commit/d84ef7688c33aab25333a43fe2248b8755f24dfb))
+
+## [2.0.4](https://github.com/esroyo/hono-webc/compare/v2.0.3...v2.0.4) (2024-09-07)
+
 ## [2.0.3](https://github.com/esroyo/hono-webc/compare/v2.0.2...v2.0.3) (2024-09-06)
 
 ## [2.0.2](https://github.com/esroyo/hono-webc/compare/v2.0.1...v2.0.2) (2024-09-06)
