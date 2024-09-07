@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.5](https://github.com/esroyo/hono-webc/compare/v2.0.3...v2.0.5) (2024-09-07)
+
+
+### Other
+
+* remove structuredClone usage ([d84ef76](https://github.com/esroyo/hono-webc/commit/d84ef7688c33aab25333a43fe2248b8755f24dfb))
+
 ## [2.0.4](https://github.com/esroyo/hono-webc/compare/v2.0.3...v2.0.4) (2024-09-07)
 
 
