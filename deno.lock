@@ -3,6 +3,7 @@
   "packages": {
     "specifiers": {
       "jsr:@esroyo/webc-lax@1.1.8": "jsr:@esroyo/webc-lax@1.1.8",
+      "jsr:@esroyo/webc-lax@1.1.9": "jsr:@esroyo/webc-lax@1.1.9",
       "jsr:@hono/hono@4.4.4": "jsr:@hono/hono@4.4.4",
       "jsr:@std/assert@1.0.0-rc.1": "jsr:@std/assert@1.0.0-rc.1",
       "jsr:@std/async@^0.224.2": "jsr:@std/async@0.224.2",
@@ -26,6 +27,9 @@
     "jsr": {
       "@esroyo/webc-lax@1.1.8": {
         "integrity": "e86785759aabb48f4ffe153eb28a15f980bc9ecb2e0c13fd1a5676b03b7c3f25"
+      },
+      "@esroyo/webc-lax@1.1.9": {
+        "integrity": "ebc234f6f0cbe51309bb732531df7f9c688c1c22602677ed30657072174a44c1"
       },
       "@hono/hono@4.4.4": {
         "integrity": "38265f77059877cbee3579c419c561e90d8e8bf6861ce554832018b9998dcc8e"
