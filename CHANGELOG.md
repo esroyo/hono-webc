@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [2.0.6](https://github.com/esroyo/hono-webc/compare/v2.0.5...v2.0.6) (2024-09-07)
+
 ## [2.0.5](https://github.com/esroyo/hono-webc/compare/v2.0.3...v2.0.5) (2024-09-07)
 
 
