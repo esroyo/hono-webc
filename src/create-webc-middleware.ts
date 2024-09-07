@@ -93,9 +93,9 @@ export const createWebcMiddleware = <
                 page.defineComponents(defineComponents);
             }
             const data = {
+                ...options.data,
                 ...ctx.var,
-                ...structuredClone(options.data),
-                ...structuredClone(extraData),
+                ...extraData,
             };
             const buckets: Record<'css' | 'js', Record<string, string[]>> = {
                 css: {},
